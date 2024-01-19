@@ -40,6 +40,20 @@ function calculateCorrelationMatrix(matrix) {
     return correlationMatrix;
 }
 
+// 牛顿迭代法计算平方根
+function sqrt(value) {
+    let x = value;
+    let y = 1;
+    const epsilon = 0.000001; // 精度
+
+    while (x - y > epsilon) {
+        x = (x + y) / 2;
+        y = value / x;
+    }
+
+    return x;
+}
+
 function calculatePearsonCorrelation(x, y) {
     if (x.length === 0 || y.length === 0 || x.length !== y.length) {
         return 0; // 或者返回其他适当的值或错误信息
@@ -57,7 +71,7 @@ function calculatePearsonCorrelation(x, y) {
     }
 
     let numerator = n * sumXY - sumX * sumY;
-    let denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
+    let denominator = sqrt(n * sumX2 - sumX * sumX) * sqrt(n * sumY2 - sumY * sumY);
 
     if (denominator === 0) return 0;
 
