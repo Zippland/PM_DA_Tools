@@ -13,8 +13,25 @@ function createHeatmap(data, labels) {
         zmax: 1   // 设置热力图数据的最大值
     }];
 
-    Plotly.newPlot('correlationHeatmap', heatmapData);
+    const layout = {
+        title: '关联矩阵热力图',
+        xaxis: {
+            title: '变量',
+            tickmode: 'array',
+            tickvals: labels.map((_, i) => i),
+            ticktext: labels
+        },
+        yaxis: {
+            title: '变量',
+            tickmode: 'array',
+            tickvals: labels.map((_, i) => i),
+            ticktext: labels
+        }
+    };
+
+    Plotly.newPlot('correlationHeatmap', heatmapData, layout);
 }
+
 
 function readAndAnalyzeFile() {
     const fileInput = document.getElementById('fileInput');
