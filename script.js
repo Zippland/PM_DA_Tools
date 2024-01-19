@@ -16,7 +16,6 @@ function createHeatmap(data, labels) {
     Plotly.newPlot('correlationHeatmap', heatmapData);
 }
 
-
 function readAndAnalyzeFile() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
@@ -26,24 +25,22 @@ function readAndAnalyzeFile() {
 
         reader.onload = function(e) {
             const content = e.target.result;
-            const matrix = parseCSV(content);
-            const correlationMatrix = calculateCorrelationMatrix(matrix);
-            document.getElementById('analysisResult').textContent = JSON.stringify(correlationMatrix, null, 2);
-            createHeatmap(correlationMatrix);
+            const { matrix, labels } = parseCSV(content); // 确保解析 CSV 并获取矩阵和标签
+            if (matrix && matrix.length > 0) {
+                const correlationMatrix = calculateCorrelationMatrix(matrix);
+                document.getElementById('analysisResult').textContent = JSON.stringify(correlationMatrix, null, 2);
+                createHeatmap(correlationMatrix, labels); // 使用标签和相关性矩阵创建热力图
+            } else {
+                alert('无法解析文件或文件为空！');
+            }
         };
 
         reader.readAsText(file);
     } else {
         alert('请上传一个文件！');
     }
-
-    reader.onload = function(e) {
-        const content = e.target.result;
-        const { matrix, labels } = parseCSV(content); // 现在返回包含标签的对象
-        const correlationMatrix = calculateCorrelationMatrix(matrix);
-        createHeatmap(correlationMatrix, labels); // 将标签传递给 createHeatmap
-    };
 }
+
 
 function parseCSV(csvContent) {
     const lines = csvContent.trim().split('\n');
