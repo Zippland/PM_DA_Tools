@@ -41,23 +41,27 @@ function calculateCorrelationMatrix(matrix) {
 }
 
 function calculatePearsonCorrelation(x, y) {
-    if (x.length === 0 || y.length === 0) {
+    if (x.length === 0 || y.length === 0 || x.length !== y.length) {
         return 0; // 或者返回其他适当的值或错误信息
     }
 
-    let meanX = math.mean(x);
-    let meanY = math.mean(y);
-    let numerator = 0;
-    let denominatorX = 0;
-    let denominatorY = 0;
+    let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0, sumY2 = 0;
+    let n = x.length;
 
-    for (let i = 0; i < x.length; i++) {
-        numerator += (x[i] - meanX) * (y[i] - meanY);
-        denominatorX += math.pow(x[i] - meanX, 2);
-        denominatorY += math.pow(y[i] - meanY, 2);
+    for (let i = 0; i < n; i++) {
+        sumX += x[i];
+        sumY += y[i];
+        sumXY += x[i] * y[i];
+        sumX2 += x[i] * x[i];
+        sumY2 += y[i] * y[i];
     }
 
-    return numerator / (math.sqrt(denominatorX) * math.sqrt(denominatorY));
+    let numerator = n * sumXY - sumX * sumY;
+    let denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
+
+    if (denominator === 0) return 0;
+
+    return numerator / denominator;
 }
 
 function downloadCSV() {
