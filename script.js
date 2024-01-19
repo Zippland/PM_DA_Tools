@@ -95,7 +95,22 @@ function createD3Heatmap(data, labels) {
     // 添加颜色图例的轴
     legendSvg.append("g")
         .attr("transform", `translate(${legendWidth - 10}, 0)`)
-        .call(legendAxis);
+        .call(legendAxis)
+        .selectAll("text")
+        .style("font-size", "10px"); // 确保文字大小合适
+
+    // 在热力图每个块上显示数值
+    svg.selectAll()
+        .data(data.flatMap((value, i) => value.map((v, j) => ({ x: labels[j], y: labels[i], z: v }))))
+        .enter()
+        .append("text")
+        .text(d => d.z.toFixed(3)) // 显示省略到三位小数的数值
+        .attr("x", d => xScale(d.x) + xScale.bandwidth() / 2)
+        .attr("y", d => yScale(d.y) + yScale.bandwidth() / 2)
+        .attr("dy", ".35em") // 垂直居中
+        .attr("text-anchor", "middle") // 水平居中
+        .style("font-size", "10px") // 文字大小
+        .style("fill", "black"); // 文字颜色
 }
 
 
