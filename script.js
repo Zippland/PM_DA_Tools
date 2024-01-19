@@ -30,13 +30,30 @@ function calculateCorrelationMatrix(matrix) {
             if (i === j) {
                 correlationMatrix[i][j] = 1;
             } else {
-                correlationMatrix[i][j] = math.corr(matrix.map(row => row[i]), matrix.map(row => row[j]));
+                // 使用自定义函数计算相关性
+                correlationMatrix[i][j] = calculatePearsonCorrelation(matrix.map(row => row[i]), matrix.map(row => row[j]));
             }
         }
     }
     return correlationMatrix;
 }
 
+// 自定义函数计算皮尔逊相关系数
+function calculatePearsonCorrelation(x, y) {
+    let meanX = math.mean(x);
+    let meanY = math.mean(y);
+    let numerator = 0;
+    let denominatorX = 0;
+    let denominatorY = 0;
+
+    for (let i = 0; i < x.length; i++) {
+        numerator += (x[i] - meanX) * (y[i] - meanY);
+        denominatorX += math.pow(x[i] - meanX, 2);
+        denominatorY += math.pow(y[i] - meanY, 2);
+    }
+
+    return numerator / (math.sqrt(denominatorX) * math.sqrt(denominatorY));
+}
 function downloadCSV() {
     const csvText = `Column1,Column2,Column3\nValue1,Value2,Value3\nValue4,Value5,Value6`;
     const blob = new Blob([csvText], { type: 'text/csv;charset=utf-8;' });
