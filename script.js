@@ -19,7 +19,10 @@ function readAndAnalyzeFile() {
 }
 
 function parseCSV(csvContent) {
-    return csvContent.split('\n').map(row => row.split(',').map(Number));
+    // 更新 CSV 解析逻辑，确保每个元素都是数字
+    return csvContent.trim().split('\n').map(row => 
+        row.split(',').map(value => parseFloat(value.trim())).filter(value => !isNaN(value))
+    );
 }
 
 function calculateCorrelationMatrix(matrix) {
@@ -30,7 +33,6 @@ function calculateCorrelationMatrix(matrix) {
             if (i === j) {
                 correlationMatrix[i][j] = 1;
             } else {
-                // 使用自定义函数计算相关性
                 correlationMatrix[i][j] = calculatePearsonCorrelation(matrix.map(row => row[i]), matrix.map(row => row[j]));
             }
         }
@@ -38,8 +40,11 @@ function calculateCorrelationMatrix(matrix) {
     return correlationMatrix;
 }
 
-// 自定义函数计算皮尔逊相关系数
 function calculatePearsonCorrelation(x, y) {
+    if (x.length === 0 || y.length === 0) {
+        return 0; // 或者返回其他适当的值或错误信息
+    }
+
     let meanX = math.mean(x);
     let meanY = math.mean(y);
     let numerator = 0;
@@ -54,6 +59,7 @@ function calculatePearsonCorrelation(x, y) {
 
     return numerator / (math.sqrt(denominatorX) * math.sqrt(denominatorY));
 }
+
 function downloadCSV() {
     const csvText = `Column1,Column2,Column3\nValue1,Value2,Value3\nValue4,Value5,Value6`;
     const blob = new Blob([csvText], { type: 'text/csv;charset=utf-8;' });
