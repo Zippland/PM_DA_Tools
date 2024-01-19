@@ -1,3 +1,27 @@
+function createChart(data) {
+    const ctx = document.getElementById('correlationChart').getContext('2d');
+    const labels = data.map((_, index) => `变量 ${index + 1}`);
+
+    new Chart(ctx, {
+        type: 'bar', // 或者 'heatmap' 如果您找到适合的插件或实现
+        data: {
+            labels: labels,
+            datasets: data.map((row, i) => ({
+                label: `变量 ${i + 1}`,
+                data: row,
+                backgroundColor: row.map(value => value >= 0 ? 'rgba(0, 123, 255, 0.5)' : 'rgba(255, 0, 0, 0.5)'),
+            })),
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
 function readAndAnalyzeFile() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
@@ -10,6 +34,7 @@ function readAndAnalyzeFile() {
             const matrix = parseCSV(content);
             const correlationMatrix = calculateCorrelationMatrix(matrix);
             document.getElementById('analysisResult').textContent = JSON.stringify(correlationMatrix, null, 2);
+            createChart(correlationMatrix);
         };
 
         reader.readAsText(file);
