@@ -120,17 +120,27 @@ function readAndAnalyzeFile() {
     const file = fileInput.files[0];
 
     if (file) {
+        // 检查文件类型是否为 CSV
+        if (file.type !== "text/csv" && !file.name.endsWith('.csv')) {
+            alert('请上传 CSV 格式的文件！');
+            return;
+        }
+
         const reader = new FileReader();
 
         reader.onload = function(e) {
             const content = e.target.result;
-            const { matrix, labels } = parseCSV(content); // 确保解析 CSV 并获取矩阵和标签
-            if (matrix && matrix.length > 0) {
-                const correlationMatrix = calculateCorrelationMatrix(matrix);
-                document.getElementById('analysisResult').textContent = JSON.stringify(correlationMatrix, null, 2);
-                createD3Heatmap(correlationMatrix, labels); // 使用 createD3Heatmap 替换 createHeatmap
-            } else {
-                alert('无法解析文件或文件为空！');
+            try {
+                const { matrix, labels } = parseCSV(content);
+                if (matrix && matrix.length > 0 && labels.length > 0) {
+                    const correlationMatrix = calculateCorrelationMatrix(matrix);
+                    document.getElementById('analysisResult').textContent = JSON.stringify(correlationMatrix, null, 2);
+                    createD3Heatmap(correlationMatrix, labels); // 使用 createD3Heatmap 替换 createHeatmap
+                } else {
+                    alert('CSV 文件格式不正确：必须包含标题行和数据行');
+                }
+            } catch (error) {
+                alert(error.message);
             }
         };
 
@@ -141,15 +151,25 @@ function readAndAnalyzeFile() {
 }
 
 
+
+
 function parseCSV(csvContent) {
     const lines = csvContent.trim().split('\n');
-    const labels = lines[0].split(',').map(label => label.trim()); // 获取标题
-    const matrix = lines.slice(1).map(row =>
-        row.split(',').map(value => parseFloat(value.trim()))
-    ).filter(row => row.every(value => !isNaN(value)));
+    const labels = lines[0].split(',').map(label => label.trim());
 
-    return { matrix, labels }; // 返回一个包含矩阵和标签的对象
+    const matrix = lines.slice(1).map(row => {
+        return row.split(',').map(value => {
+            const num = parseFloat(value.trim());
+            if (isNaN(num)) {
+                throw new Error('数据格式错误：所有行必须只包含数字');
+            }
+            return num;
+        });
+    });
+
+    return { matrix, labels };
 }
+
 
 function calculateCorrelationMatrix(matrix) {
     let correlationMatrix = [];

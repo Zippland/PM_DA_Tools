@@ -1,120 +1,78 @@
 /* 基础样式 */
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* 标题样式 */
-h1 {
-    font-size: 24px;
-    font-weight: bold;
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.category {
+    margin-bottom: 30px;
+}
+
+.category h2 {
+    font-size: 22px;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-h2 {
-    font-size: 20px;
-    font-weight: bold;
+.tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.tool {
+    border: 1px solid #ddd;
+    padding: 15px;
+    width: calc(33.333% - 20px);
+    text-align: center;
+}
+
+.tool h3 {
+    font-size: 18px;
     color: #444;
-    margin-bottom: 10px;
 }
 
-/* 段落样式 */
-p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 15px;
-}
-
-/* 列表样式 */
-ul, ol {
-    margin-left: 20px;
-    margin-bottom: 15px;
-}
-
-li {
-    font-size: 16px;
-    line-height: 1.6;
+.tool p {
+    font-size: 14px;
     color: #555;
 }
 
-/* 按钮和输入框样式 */
-button, input[type="file"] {
-    font-size: 16px;
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button {
+.tool button {
     background-color: #007bff;
     color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
-button:hover {
+.tool button:hover {
     background-color: #0056b3;
 }
 
-/* 热力图容器样式 */
-#heatmap {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-/* 响应式调整 */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 20px;
-    }
-    h2 {
-        font-size: 18px;
-    }
-    p, li {
-        font-size: 14px;
-    }
-    button, input[type="file"] {
-        font-size: 14px;
-        padding: 8px 10px;
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .tool {
+        width: calc(50% - 20px);
     }
 }
 
-/* 弹窗基本样式 */
-.modal {
-    display: none; /* 默认隐藏 */
-    position: fixed;
-    z-index: 1; /* 位于顶层 */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* 启用滚动 */
-    background-color: rgb(0,0,0); /* 背景色 */
-    background-color: rgba(0,0,0,0.4); /* 透明度 */
+@media (max-width: 480px) {
+    .tool {
+        width: 100%;
+    }
 }
-
-/* 弹窗内容 */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
-/* 关闭按钮 */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
