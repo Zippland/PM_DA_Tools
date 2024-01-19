@@ -19,21 +19,26 @@ function readAndAnalyzeFile() {
 }
 
 function parseCSV(csvContent) {
-    // 更新 CSV 解析逻辑，确保每个元素都是数字
-    return csvContent.trim().split('\n').map(row => 
-        row.split(',').map(value => parseFloat(value.trim())).filter(value => !isNaN(value))
-    );
+    // 更新 CSV 解析逻辑，确保每行都被正确分割并转换为数值
+    return csvContent.trim().split('\n').map(row =>
+        row.split(',').map(value => parseFloat(value.trim()))
+    ).filter(row => row.every(value => !isNaN(value)));
 }
 
 function calculateCorrelationMatrix(matrix) {
     let correlationMatrix = [];
-    for (let i = 0; i < matrix.length; i++) {
+    let numRows = matrix.length;
+    let numCols = matrix[0].length;
+
+    for (let i = 0; i < numCols; i++) {
         correlationMatrix[i] = [];
-        for (let j = 0; j < matrix[i].length; j++) {
+        for (let j = 0; j < numCols; j++) {
             if (i === j) {
                 correlationMatrix[i][j] = 1;
             } else {
-                correlationMatrix[i][j] = calculatePearsonCorrelation(matrix.map(row => row[i]), matrix.map(row => row[j]));
+                let colX = matrix.map(row => row[i]);
+                let colY = matrix.map(row => row[j]);
+                correlationMatrix[i][j] = calculatePearsonCorrelation(colX, colY);
             }
         }
     }
