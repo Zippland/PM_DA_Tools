@@ -230,7 +230,7 @@ function calculatePearsonCorrelation(x, y) {
 }
 
 function downloadCSV() {
-    const csvText = `Column1,Column2,Column3\nValue1,Value2,Value3\nValue4,Value5,Value6`;
+    const csvText = `Column1,Column2,Column3\n1,2,3\n4,5,6`;
     const blob = new Blob([csvText], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);

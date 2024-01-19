@@ -3,71 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据分析简化工具</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PM_DA_Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <header class="header">
-            <h1>数据分析简化工具</h1>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto px-4">
+        <header class="text-center my-8">
+            <h1 class="text-4xl font-bold mb-4">Poduct Manager</h1>
+            <h1 class="text-2xl font-bold mb-4">Data Analysis Tools</h1>
         </header>
 
-        <section class="category">
-            <h2>图形化工具</h2>
-            <div class="tools">
-                
-                <!-- 更多图形化工具 -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">图形化工具</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <!-- 图形化工具卡片 -->
+                <!-- 柱状图工具卡 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden p-6 w-full md:w-1/3 lg:w-1/4 mb-6">
+                    <h3 class="text-xl font-medium mb-2">柱状图</h3>
+                    <p class="text-gray-600 mb-4">创建和分析柱状图。</p>
+                    <a href="src/BarChart.html" class="block bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded">
+                        使用此工具
+                    </a>
+                </div>
+
+                <!-- 箱型图工具卡 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden p-6 w-full md:w-1/3 lg:w-1/4 mb-6">
+                    <h3 class="text-xl font-medium mb-2">箱型图</h3>
+                    <p class="text-gray-600 mb-4">创建和分析箱型图。</p>
+                    <a href="src/BoxPlot.html" class="block bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded">
+                        使用此工具
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section class="category">
-            <h2>数据分析工具</h2>
-            <div class="tools">
-                <div class="tool">
-                    <h3>关联矩阵分析</h3>
-                    <p>上传数据，生成关联矩阵热力图。</p>
-                    <a href="src/CorelatedMatrix.html" class="tool-link">
-                        <button>使用此工具</button>
-                    </a>
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">数据分析工具</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <!-- 数据分析工具卡片 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="tool bg-white shadow rounded p-4">
+                        <h3 class="text-lg font-semibold mb-2">数据关联性分析</h3>
+                        <p class="text-sm text-gray-600 mb-4">上传数据，同查内部关联性。</p>
+                        <a href="src/CorelatedMatrix.html" class="block bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded">
+                            使用此工具
+                        </a>
+                    </div>
+                
+                    <div class="tool bg-white shadow rounded p-4">
+                        <h3 class="text-lg font-semibold mb-2">时间趋势分析</h3>
+                        <p class="text-sm text-gray-600 mb-4">识别数据集中的主要趋势和模式。</p>
+                        <a href="src/TrendAnalysis.html" class="block bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded">
+                            使用此工具
+                        </a>
+                    </div>
+                
+                    <div class="tool bg-white shadow rounded p-4">
+                        <h3 class="text-lg font-semibold mb-2">异常检测</h3>
+                        <p class="text-sm text-gray-600 mb-4">快速发现数据中的异常和偏差。</p>
+                        <a href="src/AnomalyDetection.html" class="block bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded">
+                            使用此工具
+                        </a>
+                    </div>
+                
+                    <div class="tool bg-white shadow rounded p-4">
+                        <h3 class="text-lg font-semibold mb-2">预测建模</h3>
+                        <p class="text-sm text-gray-600 mb-4">基于历史数据，预测未来趋势。</p>
+                        <a href="src/PredictiveModeling.html" class="block bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded">
+                            使用此工具
+                        </a>
+                    </div>
+                
+                    <div class="tool bg-white shadow rounded p-4">
+                        <h3 class="text-lg font-semibold mb-2">预测分类</h3>
+                        <p class="text-sm text-gray-600 mb-4">基于已有分类数据，对新数据进行归类分类。</p>
+                        <a href="src/UserBehaviorAnalysis.html" class="block bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded">
+                            使用此工具
+                        </a>
+                    </div>
+                    
+                    <div class="tool bg-white shadow rounded p-4">
+                        <h3 class="text-lg font-semibold mb-2">用户行为分析</h3>
+                        <p class="text-sm text-gray-600 mb-4">深入分析用户行为，为产品优化提供指导。</p>
+                        <a href="src/UserBehaviorAnalysis.html" class="block bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded">
+                            使用此工具
+                        </a>
+                    </div>
+
                 </div>
                 
-                <div class="tool">
-                    <h3>趋势分析</h3>
-                    <p>识别数据集中的主要趋势和模式。</p>
-                    <a href="src/TrendAnalysis.html" class="tool-link">
-                        <button>使用此工具</button>
-                    </a>
-                </div>
-                
-                <div class="tool">
-                    <h3>异常检测</h3>
-                    <p>快速发现数据中的异常和偏差。</p>
-                    <a href="src/AnomalyDetection.html" class="tool-link">
-                        <button>使用此工具</button>
-                    </a>
-                </div>
-                
-                <div class="tool">
-                    <h3>预测建模</h3>
-                    <p>基于历史数据，预测未来趋势。</p>
-                    <a href="src/PredictiveModeling.html" class="tool-link">
-                        <button>使用此工具</button>
-                    </a>
-                </div>
-                
-                <div class="tool">
-                    <h3>用户行为分析</h3>
-                    <p>深入分析用户行为，为产品优化提供指导。</p>
-                    <a href="src/UserBehaviorAnalysis.html" class="tool-link">
-                        <button>使用此工具</button>
-                    </a>
-                </div>
-                
-                <!-- 数据分析工具模块 -->
+                <!-- 更多工具 -->
             </div>
         </section>
-
-        <!-- 更多分类 -->
     </div>
 </body>
 </html>
