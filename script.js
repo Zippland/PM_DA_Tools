@@ -2,12 +2,15 @@ function createD3Heatmap(data, labels) {
     const margin = { top: 50, right: 25, bottom: 50, left: 60 };
     const width = 450 - margin.left - margin.right;
     const height = 450 - margin.top - margin.bottom;
+    const legendWidth = 50; // 调整图例宽度
+    const totalWidth = width + margin.left + margin.right + legendWidth; // 总宽度包括图例
 
     // 清除现有的图表内容
     d3.select("#heatmap").html("");
 
+    // 创建热力图和图例的 SVG 容器
     const svg = d3.select("#heatmap").append("svg")
-        .attr("width", width + margin.left + margin.right)
+        .attr("width", totalWidth)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -45,6 +48,54 @@ function createD3Heatmap(data, labels) {
         .attr("width", xScale.bandwidth())
         .attr("height", yScale.bandwidth())
         .style("fill", d => colorScale(d.z));
+
+    // 使用热力图的高度作为图例高度
+    const legendHeight = height;
+
+    // 创建颜色图例的 SVG 容器（位于热力图右侧）
+    const legendSvg = d3.select("#heatmap svg").append("g")
+        .attr("transform", `translate(${width + margin.left + margin.right + 10}, ${margin.top})`);
+
+    // 创建颜色比例尺
+    const legendScale = d3.scaleLinear()
+        .range([legendHeight, 0])
+        .domain([1, -1]);
+
+    // 定义颜色图例的轴
+    const legendAxis = d3.axisRight(legendScale)
+        .tickValues([1, 0, -1]) // 明确设置刻度为 1, 0, -1
+        .tickFormat(d3.format(".1f"));
+
+    // 添加颜色图例的渐变
+    legendSvg.append("defs")
+        .append("linearGradient")
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("x2", "0%")
+        .attr("y1", "100%")
+        .attr("y2", "0%")
+        .selectAll("stop")
+        .data(colorScale.range().map(function(color, index) {
+            return {
+                color: color,
+                offset: `${index * 50}%`,
+                value: colorScale.domain()[index]
+            };
+        }))
+        .enter().append("stop")
+        .attr("offset", d => d.offset)
+        .attr("stop-color", d => d.color);
+
+    // 绘制颜色图例
+    legendSvg.append("rect")
+        .attr("width", legendWidth - 10)
+        .attr("height", legendHeight)
+        .style("fill", "url(#gradient)");
+
+    // 添加颜色图例的轴
+    legendSvg.append("g")
+        .attr("transform", `translate(${legendWidth - 10}, 0)`)
+        .call(legendAxis);
 }
 
 
