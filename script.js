@@ -1,33 +1,50 @@
-function createHeatmap(data, labels) {
-    const heatmapData = [{
-        x: labels,
-        y: labels,
-        z: data,
-        type: 'heatmap',
-        colorscale: [
-            [0, 'blue'],    // 数据值为 -1 时的颜色
-            [0.5, 'white'], // 数据值为 0 时的颜色
-            [1, 'red']      // 数据值为 1 时的颜色
-        ],
-        zmin: -1, // 设置热力图数据的最小值
-        zmax: 1   // 设置热力图数据的最大值
-    }];
+function createD3Heatmap(data, labels) {
+    const margin = { top: 50, right: 25, bottom: 50, left: 60 };
+    const width = 450 - margin.left - margin.right;
+    const height = 450 - margin.top - margin.bottom;
 
-    const layout = {
-        title: '关联矩阵热力图',
-        margin: { l: 50, r: 50, b: 100, t: 100, pad: 4 },
-        xaxis: {
-            title: '变量',
-            tickangle: -45,
-            automargin: true
-        },
-        yaxis: {
-            title: '变量',
-            automargin: true
-        }
-    };
+    // 清除现有的图表内容
+    d3.select("#heatmap").html("");
 
-    Plotly.newPlot('correlationHeatmap', heatmapData, layout);
+    const svg = d3.select("#heatmap").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    const xScale = d3.scaleBand()
+        .range([0, width])
+        .domain(labels)
+        .padding(0.05);
+
+    svg.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-45)")
+        .style("text-anchor", "end");
+
+    const yScale = d3.scaleBand()
+        .range([height, 0])
+        .domain(labels)
+        .padding(0.05);
+
+    svg.append("g")
+        .call(d3.axisLeft(yScale));
+
+    const colorScale = d3.scaleLinear()
+        .range(["blue", "white", "red"])
+        .domain([-1, 0, 1]);
+
+    svg.selectAll()
+        .data(data.flatMap((value, i) => value.map((v, j) => ({ x: labels[j], y: labels[i], z: v }))))
+        .enter()
+        .append("rect")
+        .attr("x", d => xScale(d.x))
+        .attr("y", d => yScale(d.y))
+        .attr("width", xScale.bandwidth())
+        .attr("height", yScale.bandwidth())
+        .style("fill", d => colorScale(d.z));
 }
 
 
@@ -45,7 +62,7 @@ function readAndAnalyzeFile() {
             if (matrix && matrix.length > 0) {
                 const correlationMatrix = calculateCorrelationMatrix(matrix);
                 document.getElementById('analysisResult').textContent = JSON.stringify(correlationMatrix, null, 2);
-                createHeatmap(correlationMatrix, labels); // 使用标签和相关性矩阵创建热力图
+                createD3Heatmap(correlationMatrix, labels); // 使用 createD3Heatmap 替换 createHeatmap
             } else {
                 alert('无法解析文件或文件为空！');
             }

@@ -6,8 +6,7 @@
     <title>关联矩阵分析工具</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 </head>
 <body class="m-4">
     <h1 class="text-2xl font-bold mb-4">关联矩阵分析工具</h1>
@@ -22,7 +21,7 @@
     </button>
 
     <h2 class="text-xl font-bold mt-4 mb-2">分析结果：</h2>
-    <div id="correlationHeatmap" style="width:600px;height:600px;"></div>
+    <div id="heatmap"></div> <!-- 热力图的容器 -->
     <pre id="analysisResult"></pre>
 
     <script src="script.js"></script>
