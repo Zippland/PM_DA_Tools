@@ -4,11 +4,18 @@ function createHeatmap(data, labels) {
         y: labels,
         z: data,
         type: 'heatmap',
-        colorscale: 'YlGnBu',
+        colorscale: [
+            [-1, 'blue'], // 数据值为 -1 时的颜色
+            [0, 'white'],  // 数据值为 0 时的颜色
+            [1, 'red']     // 数据值为 1 时的颜色
+        ],
+        zmin: -1, // 设置热力图数据的最小值
+        zmax: 1   // 设置热力图数据的最大值
     }];
 
     Plotly.newPlot('correlationHeatmap', heatmapData);
 }
+
 
 function readAndAnalyzeFile() {
     const fileInput = document.getElementById('fileInput');
