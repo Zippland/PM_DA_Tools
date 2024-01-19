@@ -1,5 +1,4 @@
-function createHeatmap(data) {
-    const labels = data.map((_, index) => `变量 ${index + 1}`);
+function createHeatmap(data, labels) {
     const heatmapData = [{
         x: labels,
         y: labels,
@@ -30,13 +29,23 @@ function readAndAnalyzeFile() {
     } else {
         alert('请上传一个文件！');
     }
+
+    reader.onload = function(e) {
+        const content = e.target.result;
+        const { matrix, labels } = parseCSV(content); // 现在返回包含标签的对象
+        const correlationMatrix = calculateCorrelationMatrix(matrix);
+        createHeatmap(correlationMatrix, labels); // 将标签传递给 createHeatmap
+    };
 }
 
 function parseCSV(csvContent) {
-    // 更新 CSV 解析逻辑，确保每行都被正确分割并转换为数值
-    return csvContent.trim().split('\n').map(row =>
+    const lines = csvContent.trim().split('\n');
+    const labels = lines[0].split(',').map(label => label.trim()); // 获取标题
+    const matrix = lines.slice(1).map(row =>
         row.split(',').map(value => parseFloat(value.trim()))
     ).filter(row => row.every(value => !isNaN(value)));
+
+    return { matrix, labels }; // 返回一个包含矩阵和标签的对象
 }
 
 function calculateCorrelationMatrix(matrix) {
