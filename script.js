@@ -5,9 +5,9 @@ function createHeatmap(data, labels) {
         z: data,
         type: 'heatmap',
         colorscale: [
-            [-1, 'blue'], // 数据值为 -1 时的颜色
-            [0, 'white'],  // 数据值为 0 时的颜色
-            [1, 'red']     // 数据值为 1 时的颜色
+            [0, 'blue'],    // 数据值为 -1 时的颜色
+            [0.5, 'white'], // 数据值为 0 时的颜色
+            [1, 'red']      // 数据值为 1 时的颜色
         ],
         zmin: -1, // 设置热力图数据的最小值
         zmax: 1   // 设置热力图数据的最大值
@@ -15,22 +15,21 @@ function createHeatmap(data, labels) {
 
     const layout = {
         title: '关联矩阵热力图',
+        margin: { l: 50, r: 50, b: 100, t: 100, pad: 4 },
         xaxis: {
             title: '变量',
-            tickmode: 'array',
-            tickvals: labels.map((_, i) => i),
-            ticktext: labels
+            tickangle: -45,
+            automargin: true
         },
         yaxis: {
             title: '变量',
-            tickmode: 'array',
-            tickvals: labels.map((_, i) => i),
-            ticktext: labels
+            automargin: true
         }
     };
 
     Plotly.newPlot('correlationHeatmap', heatmapData, layout);
 }
+
 
 
 function readAndAnalyzeFile() {
