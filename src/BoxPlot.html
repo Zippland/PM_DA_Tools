@@ -19,16 +19,27 @@
             下载示例 CSV
         </button>
         <input type="file" id="fileInput" class="file-input"/>
-        <button onclick="readAndCreateBoxPlot()" class="btn bg-blue-500">
+        <button id="uploadButton" onclick="readAndCreateBoxPlot()" class="btn bg-blue-500">
             上传并绘制
         </button>
     </div>
 
+    <div class="mb-4">
+        <label for="xAxis">选择 X 轴:</label>
+        <select id="xAxis" class="m-2 p-2 border rounded">
+            <!-- X轴选项将通过 JavaScript 动态生成 -->
+        </select>
+
+        <label for="yAxis">选择 Y 轴:</label>
+        <select id="yAxis" class="m-2 p-2 border rounded">
+            <!-- Y轴选项将通过 JavaScript 动态生成 -->
+        </select>
+    </div>
+
     <section class="results">
         <div id="boxPlot"></div> <!-- 箱型图的容器 -->
-        <pre id="boxPlotResult"></pre>
     </section>
 
-    <script src="BoxPlotToolScript.js"></script>
+    <script src="boxPlotScript.js"></script>
 </body>
 </html>
