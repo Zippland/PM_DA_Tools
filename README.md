@@ -1,55 +1,27 @@
-# 数据分析简化工具
+# PM_DA_Tools
 
-## 简介
-“PM_DA_Tools”是一个旨在为非技术人员，特别是产品经理，提供简单而强大的数据分析能力的网站。我理解，尽管数据分析对于产品决策至关重要，但不是所有产品经理都具备统计学或数据处理的专业技能。这个工具的开发初衷是为了让数据分析变得无需专业知识，即便是“数据分析新手”也能轻松掌握并有效使用。
+## Overview
 
-## 功能
-当前，我提供的第一个功能是“关联矩阵分析”。它允许用户上传 CSV 格式的数据文件，并自动生成热力图以直观显示数据间的关联程度。这个功能特别适用于探索各种变量之间的关系，帮助用户快速识别数据中的潜在模式和趋势。
+PM_DA_Tools is a web-based application designed to empower non-technical users, particularly product managers, with easy yet powerful data analysis capabilities. This tool simplifies data analysis, making it accessible even for novices in data analytics.
 
-未来，我们计划陆续推出更多功能，包括但不限于：
-- **趋势分析**：自动识别和展示数据随时间的变化趋势。
-- **异常检测**：快速发现数据中的异常点，帮助用户及时调整策略。
-- **预测建模**：提供简单的界面让用户能够生成预测模型，预测未来趋势。
-- **用户行为分析**：深入理解用户行为，提供更有针对性的产品决策支持。
+## Features
 
-## 为何选择该工具
-- **易于使用**：直观的用户界面，无需编程或统计学背景。
-- **即时反馈**：上传数据后立即看到可视化结果。
-- **隐私保障**：所有数据处理都在用户的本地浏览器内完成，不上传至任何服务器。
+- **Correlation Matrix Analysis:** Allows users to upload CSV files and automatically generates heatmaps to visually represent the correlations between data points.
+- **Upcoming Features:** Includes trend analysis, anomaly detection, predictive modeling, and user behavior analysis to support data-driven decision making.
 
-## 使用方法
-1. 访问网站。
-2. 选择并上传您的 CSV 数据文件。
-3. 系统会自动分析数据并展示结果。
-4. 使用提供的各种工具来深入理解您的数据。
+## Why Choose PM_DA_Tools?
 
-## 未来规划
-不断改进和扩展功能，使“PM_DA_Tools”成为每一位产品经理的得力助手。我相信，通过使数据分析变得简单易行，可以帮助产品经理做出更明智的决策，从而推动产品向更好的方向发展。
+- **User-Friendly:** Intuitive interface requiring no prior programming or statistical knowledge.
+- **Immediate Results:** Visualizations are generated quickly after data upload.
+- **Data Privacy:** All data processing is done locally, ensuring user data remains private.
 
----
+## Getting Started
 
-## 关联矩阵分析工具
+1. Visit the website.
+2. Upload your CSV data file.
+3. View the automatically generated analysis results.
+4. Utilize the tools provided to gain deeper insights into your data.
 
-### 介绍
-“关联矩阵分析工具”是一个用于探索和可视化数据间关联性的网页应用。它允许用户上传包含数值数据的 CSV 文件，并生成一个热力图来展示数据列之间的关联程度。这个工具特别适合于统计分析、数据科学和任何需要理解变量之间关系的场景。
+## Future Plans
 
-### 功能
-- **上传数据**：用户可以上传自己的 CSV 格式数据文件。
-- **自动计算关联性**：工具自动计算文件中各列数据的关联矩阵。
-- **热力图展示**：结果以热力图的形式展示，通过颜色的变化 intuitively 示数据间的关联强度。
-
-### 如何使用
-1. **下载示例 CSV 文件**（可选）：点击“下载示例 CSV”按钮，获取数据格式的参考。
-2. **上传 CSV 文件**：点击“选择文件”按钮，选择您的 CSV 文件。
-3. **开始分析**：点击“上传并分析”按钮，工具将自动处理您的数据，并展示分析结果。
-4. **查看结果**：结果将以热力图形式展示，您可以直观地看到不同变量间的关联程度。
-
-### 示例
-假设您有一个包含股票市场数据的 CSV 文件，列包括不同公司的股价。上传文件后，热力图将展示这些公司股价变动间的关联性。例如，如果两家公司的股价变动趋势相似，则相应的热力图区域会显示为较暖的颜色，表示较高的正相关性；相反，如果一家公司股价上涨时另一家下跌，则显示为较冷的颜色，表示负相关性。
-
-### 注意事项
-- 确保您的 CSV 文件格式正确，即数据以逗号分隔。
-- 此工具仅对数值数据进行分析。
-- 所有数据处理均在本地进行，确保了数据的隐私性。
-
-使用此工具，您可以轻松地探索和理解大量数据间的复杂关系，这对于数据分析和决策制定至关重要。
+I aim to continuously improve and expand the functionalities of PM_DA_Tools, making it an indispensable tool for every product manager looking to make informed decisions.
